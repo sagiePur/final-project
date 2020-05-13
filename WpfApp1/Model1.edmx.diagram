@@ -4,10 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d2bdcc6e7cf4498aafade31a97020fd9" Name="Diagram1">
-        <EntityTypeShape EntityType="dbModel.employee_type_id" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.Employees" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="dbModel.FK_Employees_ToType_" ManuallyRouted="false" />
+      <Diagram DiagramId="88ce1069fc0d43bbbd9ef3dae9e2e88d" Name="Diagram1">
+        <EntityTypeShape EntityType="dbModel.customer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.employee_type" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.expense" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.license" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.passenger" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.transportation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.transportation_passangers" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.vehicle" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.employee" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="dbModel.FK_employee_employee_type" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.FK_transportation_Tolicense" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.FK_transportation_passangers_Topassenger" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.FK_transportation_passangers_Totransportation" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.FK_transportation_Tovehicle" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
