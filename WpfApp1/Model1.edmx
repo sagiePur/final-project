@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,55 +15,37 @@
           <Property Name="phone" Type="nvarchar" MaxLength="12" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MDF.dbo.employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="employee">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="telephone" />
-            <PropertyRef Name="address" />
-            <PropertyRef Name="employee_type_id" />
-            <PropertyRef Name="deleted" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="license_number" Type="nvarchar" MaxLength="50" />
           <Property Name="employee_type_id" Type="int" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="employee_type">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="salery" Type="float" Nullable="false" />
           <Property Name="license_type" Type="nvarchar" MaxLength="10" />
           <Property Name="description" Type="nvarchar" MaxLength="50" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="expense">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="cost" Type="float" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="license">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="employee_id" Type="int" Nullable="false" />
-          <Property Name="has_bus_license" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="passenger">
           <Key>
@@ -74,19 +56,16 @@ warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MD
           <Property Name="last_name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="pohne" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="address" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="transportation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="vehicle_id" Type="nvarchar" MaxLength="8" Nullable="false" />
-          <Property Name="license_id" Type="nvarchar" MaxLength="12" Nullable="false" />
-          <Property Name="beginning_time" Type="datetime" Nullable="false" />
-          <Property Name="end_time" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="vehicle_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="income" Type="float" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="transportation_passangers">
           <Key>
@@ -95,16 +74,23 @@ warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MD
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="transportation_id" Type="int" Nullable="false" />
           <Property Name="passenger_id" Type="int" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="vehicle">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="car_model" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sits" Type="int" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehicle_assign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="vehicle_id" Type="int" Nullable="false" />
+          <Property Name="beginning_time" Type="datetime" Nullable="false" />
+          <Property Name="end_time" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_employee_employee_type">
           <End Role="employee_type" Type="Self.employee_type" Multiplicity="1" />
@@ -115,6 +101,18 @@ warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MD
             </Principal>
             <Dependent Role="employee">
               <PropertyRef Name="employee_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_expense_ToEmployee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="expense" Type="Self.expense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="expense">
+              <PropertyRef Name="employee_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -142,15 +140,27 @@ warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MD
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_transportation_Tolicense">
-          <End Role="license" Type="Self.license" Multiplicity="1" />
+        <Association Name="FK_transportation_ToCustomer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
           <End Role="transportation" Type="Self.transportation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="license">
-              <PropertyRef Name="id" />
+            <Principal Role="customer">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="transportation">
-              <PropertyRef Name="license_id" />
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transportation_Toemployee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="transportation" Type="Self.transportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transportation">
+              <PropertyRef Name="employee_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,29 +176,35 @@ warning 6002: The table/view 'C:\USERS\OWNER\DESKTOP\FINAL-PROJECT\WPFAPP1\DB.MD
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_vehicle_assign">
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="1" />
+          <End Role="vehicle_assign" Type="Self.vehicle_assign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vehicle_assign">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbModelStoreContainer">
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee_type" EntityType="Self.employee_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="expense" EntityType="Self.expense" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="license" EntityType="Self.license" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="passenger" EntityType="Self.passenger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transportation" EntityType="Self.transportation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transportation_passangers" EntityType="Self.transportation_passangers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="employee" EntityType="Self.employee" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[employee].[Id] AS [Id], 
-[employee].[name] AS [name], 
-[employee].[telephone] AS [telephone], 
-[employee].[address] AS [address], 
-[employee].[license_number] AS [license_number], 
-[employee].[employee_type_id] AS [employee_type_id], 
-[employee].[deleted] AS [deleted]
-FROM [dbo].[employee] AS [employee]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="vehicle_assign" EntityType="Self.vehicle_assign" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_employee_employee_type" Association="Self.FK_employee_employee_type">
             <End Role="employee_type" EntitySet="employee_type" />
             <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expense_ToEmployee" Association="Self.FK_expense_ToEmployee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="expense" EntitySet="expense" />
           </AssociationSet>
           <AssociationSet Name="FK_transportation_passangers_Topassenger" Association="Self.FK_transportation_passangers_Topassenger">
             <End Role="passenger" EntitySet="passenger" />
@@ -198,89 +214,142 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
             <End Role="transportation" EntitySet="transportation" />
             <End Role="transportation_passangers" EntitySet="transportation_passangers" />
           </AssociationSet>
-          <AssociationSet Name="FK_transportation_Tolicense" Association="Self.FK_transportation_Tolicense">
-            <End Role="license" EntitySet="license" />
+          <AssociationSet Name="FK_transportation_ToCustomer" Association="Self.FK_transportation_ToCustomer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="transportation" EntitySet="transportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_Toemployee" Association="Self.FK_transportation_Toemployee">
+            <End Role="employee" EntitySet="employee" />
             <End Role="transportation" EntitySet="transportation" />
           </AssociationSet>
           <AssociationSet Name="FK_transportation_Tovehicle" Association="Self.FK_transportation_Tovehicle">
             <End Role="vehicle" EntitySet="vehicle" />
             <End Role="transportation" EntitySet="transportation" />
           </AssociationSet>
+          <AssociationSet Name="FK_vehicle_assign" Association="Self.FK_vehicle_assign">
+            <End Role="vehicle" EntitySet="vehicle" />
+            <End Role="vehicle_assign" EntitySet="vehicle_assign" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customer" EntityType="dbModel.customer" />
+          <EntitySet Name="employee" EntityType="dbModel.employee" />
+          <EntitySet Name="employee_type" EntityType="dbModel.employee_type" />
+          <EntitySet Name="expense" EntityType="dbModel.expense" />
+          <EntitySet Name="passenger" EntityType="dbModel.passenger" />
+          <EntitySet Name="transportation" EntityType="dbModel.transportation" />
+          <EntitySet Name="transportation_passangers" EntityType="dbModel.transportation_passangers" />
+          <EntitySet Name="vehicle" EntityType="dbModel.vehicle" />
+          <EntitySet Name="vehicle_assign" EntityType="dbModel.vehicle_assign" />
+          <AssociationSet Name="FK_transportation_ToCustomer" Association="dbModel.FK_transportation_ToCustomer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="transportation" EntitySet="transportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_employee_type" Association="dbModel.FK_employee_employee_type">
+            <End Role="employee_type" EntitySet="employee_type" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_expense_ToEmployee" Association="dbModel.FK_expense_ToEmployee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="expense" EntitySet="expense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_Toemployee" Association="dbModel.FK_transportation_Toemployee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="transportation" EntitySet="transportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_passangers_Topassenger" Association="dbModel.FK_transportation_passangers_Topassenger">
+            <End Role="passenger" EntitySet="passenger" />
+            <End Role="transportation_passangers" EntitySet="transportation_passangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_passangers_Totransportation" Association="dbModel.FK_transportation_passangers_Totransportation">
+            <End Role="transportation" EntitySet="transportation" />
+            <End Role="transportation_passangers" EntitySet="transportation_passangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_Tovehicle" Association="dbModel.FK_transportation_Tovehicle">
+            <End Role="vehicle" EntitySet="vehicle" />
+            <End Role="transportation" EntitySet="transportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vehicle_assign" Association="dbModel.FK_vehicle_assign">
+            <End Role="vehicle" EntitySet="vehicle" />
+            <End Role="vehicle_assign" EntitySet="vehicle_assign" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_ToCustomer" FromRole="customer" ToRole="transportation" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="license_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="employee_type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee_type" Relationship="dbModel.FK_employee_employee_type" FromRole="employee" ToRole="employee_type" />
+          <NavigationProperty Name="expense" Relationship="dbModel.FK_expense_ToEmployee" FromRole="employee" ToRole="expense" />
+          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_Toemployee" FromRole="employee" ToRole="transportation" />
         </EntityType>
         <EntityType Name="employee_type">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="salery" Type="Double" Nullable="false" />
           <Property Name="license_type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="employee" Relationship="Self.FK_employee_employee_type" FromRole="employee_type" ToRole="employee" />
+          <NavigationProperty Name="employee" Relationship="dbModel.FK_employee_employee_type" FromRole="employee_type" ToRole="employee" />
         </EntityType>
         <EntityType Name="expense">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cost" Type="Double" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="license">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="employee_id" Type="Int32" Nullable="false" />
-          <Property Name="has_bus_license" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="transportation" Relationship="Self.FK_transportation_Tolicense" FromRole="license" ToRole="transportation" />
+          <NavigationProperty Name="employee" Relationship="dbModel.FK_expense_ToEmployee" FromRole="expense" ToRole="employee" />
         </EntityType>
         <EntityType Name="passenger">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="pohne" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="transportation_passangers" Relationship="Self.FK_transportation_passangers_Topassenger" FromRole="passenger" ToRole="transportation_passangers" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="pohne" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="transportation_passangers" Relationship="dbModel.FK_transportation_passangers_Topassenger" FromRole="passenger" ToRole="transportation_passangers" />
         </EntityType>
         <EntityType Name="transportation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="vehicle_id" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="license_id" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="beginning_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
           <Property Name="income" Type="Double" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="license" Relationship="Self.FK_transportation_Tolicense" FromRole="transportation" ToRole="license" />
-          <NavigationProperty Name="transportation_passangers" Relationship="Self.FK_transportation_passangers_Totransportation" FromRole="transportation" ToRole="transportation_passangers" />
-          <NavigationProperty Name="vehicle" Relationship="Self.FK_transportation_Tovehicle" FromRole="transportation" ToRole="vehicle" />
+          <NavigationProperty Name="customer" Relationship="dbModel.FK_transportation_ToCustomer" FromRole="transportation" ToRole="customer" />
+          <NavigationProperty Name="employee" Relationship="dbModel.FK_transportation_Toemployee" FromRole="transportation" ToRole="employee" />
+          <NavigationProperty Name="transportation_passangers" Relationship="dbModel.FK_transportation_passangers_Totransportation" FromRole="transportation" ToRole="transportation_passangers" />
+          <NavigationProperty Name="vehicle" Relationship="dbModel.FK_transportation_Tovehicle" FromRole="transportation" ToRole="vehicle" />
         </EntityType>
         <EntityType Name="transportation_passangers">
           <Key>
@@ -289,41 +358,44 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="transportation_id" Type="Int32" Nullable="false" />
           <Property Name="passenger_id" Type="Int32" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="passenger" Relationship="Self.FK_transportation_passangers_Topassenger" FromRole="transportation_passangers" ToRole="passenger" />
-          <NavigationProperty Name="transportation" Relationship="Self.FK_transportation_passangers_Totransportation" FromRole="transportation_passangers" ToRole="transportation" />
+          <NavigationProperty Name="passenger" Relationship="dbModel.FK_transportation_passangers_Topassenger" FromRole="transportation_passangers" ToRole="passenger" />
+          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_passangers_Totransportation" FromRole="transportation_passangers" ToRole="transportation" />
         </EntityType>
         <EntityType Name="vehicle">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="car_model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="car_model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sits" Type="Int32" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="transportation" Relationship="Self.FK_transportation_Tovehicle" FromRole="vehicle" ToRole="transportation" />
+          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_Tovehicle" FromRole="vehicle" ToRole="transportation" />
+          <NavigationProperty Name="vehicle_assign" Relationship="dbModel.FK_vehicle_assign" FromRole="vehicle" ToRole="vehicle_assign" />
         </EntityType>
-        <EntityType Name="employee">
+        <EntityType Name="vehicle_assign">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="telephone" />
-            <PropertyRef Name="address" />
-            <PropertyRef Name="employee_type_id" />
-            <PropertyRef Name="deleted" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="license_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="employee_type_id" Type="Int32" Nullable="false" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="employee_type" Relationship="Self.FK_employee_employee_type" FromRole="employee" ToRole="employee_type" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
+          <Property Name="beginning_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="vehicle" Relationship="dbModel.FK_vehicle_assign" FromRole="vehicle_assign" ToRole="vehicle" />
         </EntityType>
+        <Association Name="FK_transportation_ToCustomer">
+          <End Type="dbModel.customer" Role="customer" Multiplicity="1" />
+          <End Type="dbModel.transportation" Role="transportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transportation">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_employee_employee_type">
-          <End Role="employee_type" Type="Self.employee_type" Multiplicity="1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <End Type="dbModel.employee_type" Role="employee_type" Multiplicity="1" />
+          <End Type="dbModel.employee" Role="employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="employee_type">
               <PropertyRef Name="Id" />
@@ -333,21 +405,33 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_transportation_Tolicense">
-          <End Role="license" Type="Self.license" Multiplicity="1" />
-          <End Role="transportation" Type="Self.transportation" Multiplicity="*" />
+        <Association Name="FK_expense_ToEmployee">
+          <End Type="dbModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="dbModel.expense" Role="expense" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="license">
-              <PropertyRef Name="id" />
+            <Principal Role="employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="expense">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transportation_Toemployee">
+          <End Type="dbModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="dbModel.transportation" Role="transportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="transportation">
-              <PropertyRef Name="license_id" />
+              <PropertyRef Name="employee_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_transportation_passangers_Topassenger">
-          <End Role="passenger" Type="Self.passenger" Multiplicity="1" />
-          <End Role="transportation_passangers" Type="Self.transportation_passangers" Multiplicity="*" />
+          <End Type="dbModel.passenger" Role="passenger" Multiplicity="1" />
+          <End Type="dbModel.transportation_passangers" Role="transportation_passangers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="passenger">
               <PropertyRef Name="Id" />
@@ -358,8 +442,8 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_transportation_passangers_Totransportation">
-          <End Role="transportation" Type="Self.transportation" Multiplicity="1" />
-          <End Role="transportation_passangers" Type="Self.transportation_passangers" Multiplicity="*" />
+          <End Type="dbModel.transportation" Role="transportation" Multiplicity="1" />
+          <End Type="dbModel.transportation_passangers" Role="transportation_passangers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="transportation">
               <PropertyRef Name="Id" />
@@ -370,8 +454,8 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_transportation_Tovehicle">
-          <End Role="vehicle" Type="Self.vehicle" Multiplicity="1" />
-          <End Role="transportation" Type="Self.transportation" Multiplicity="*" />
+          <End Type="dbModel.vehicle" Role="vehicle" Multiplicity="1" />
+          <End Type="dbModel.transportation" Role="transportation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="vehicle">
               <PropertyRef Name="id" />
@@ -381,143 +465,117 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="customer" EntityType="Self.customer" />
-          <EntitySet Name="employee_type" EntityType="Self.employee_type" />
-          <EntitySet Name="expense" EntityType="Self.expense" />
-          <EntitySet Name="license" EntityType="Self.license" />
-          <EntitySet Name="passenger" EntityType="Self.passenger" />
-          <EntitySet Name="transportation" EntityType="Self.transportation" />
-          <EntitySet Name="transportation_passangers" EntityType="Self.transportation_passangers" />
-          <EntitySet Name="vehicle" EntityType="Self.vehicle" />
-          <EntitySet Name="employee" EntityType="Self.employee" />
-          <AssociationSet Name="FK_employee_employee_type" Association="Self.FK_employee_employee_type">
-            <End Role="employee_type" EntitySet="employee_type" />
-            <End Role="employee" EntitySet="employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_transportation_Tolicense" Association="Self.FK_transportation_Tolicense">
-            <End Role="license" EntitySet="license" />
-            <End Role="transportation" EntitySet="transportation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_transportation_passangers_Topassenger" Association="Self.FK_transportation_passangers_Topassenger">
-            <End Role="passenger" EntitySet="passenger" />
-            <End Role="transportation_passangers" EntitySet="transportation_passangers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_transportation_passangers_Totransportation" Association="Self.FK_transportation_passangers_Totransportation">
-            <End Role="transportation" EntitySet="transportation" />
-            <End Role="transportation_passangers" EntitySet="transportation_passangers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_transportation_Tovehicle" Association="Self.FK_transportation_Tovehicle">
-            <End Role="vehicle" EntitySet="vehicle" />
-            <End Role="transportation" EntitySet="transportation" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_vehicle_assign">
+          <End Type="dbModel.vehicle" Role="vehicle" Multiplicity="1" />
+          <End Type="dbModel.vehicle_assign" Role="vehicle_assign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vehicle_assign">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities2">
           <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="dbModel.customer">
               <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="employee_type">
-            <EntityTypeMapping TypeName="dbModel.employee_type">
-              <MappingFragment StoreEntitySet="employee_type">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="salery" ColumnName="salery" />
-                <ScalarProperty Name="license_type" ColumnName="license_type" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="expense">
-            <EntityTypeMapping TypeName="dbModel.expense">
-              <MappingFragment StoreEntitySet="expense">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="cost" ColumnName="cost" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="license">
-            <EntityTypeMapping TypeName="dbModel.license">
-              <MappingFragment StoreEntitySet="license">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-                <ScalarProperty Name="has_bus_license" ColumnName="has_bus_license" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="passenger">
-            <EntityTypeMapping TypeName="dbModel.passenger">
-              <MappingFragment StoreEntitySet="passenger">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="pohne" ColumnName="pohne" />
                 <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transportation">
-            <EntityTypeMapping TypeName="dbModel.transportation">
-              <MappingFragment StoreEntitySet="transportation">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
-                <ScalarProperty Name="license_id" ColumnName="license_id" />
-                <ScalarProperty Name="beginning_time" ColumnName="beginning_time" />
-                <ScalarProperty Name="end_time" ColumnName="end_time" />
-                <ScalarProperty Name="income" ColumnName="income" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transportation_passangers">
-            <EntityTypeMapping TypeName="dbModel.transportation_passangers">
-              <MappingFragment StoreEntitySet="transportation_passangers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="transportation_id" ColumnName="transportation_id" />
-                <ScalarProperty Name="passenger_id" ColumnName="passenger_id" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vehicle">
-            <EntityTypeMapping TypeName="dbModel.vehicle">
-              <MappingFragment StoreEntitySet="vehicle">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="car_model" ColumnName="car_model" />
-                <ScalarProperty Name="sits" ColumnName="sits" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="employee">
             <EntityTypeMapping TypeName="dbModel.employee">
               <MappingFragment StoreEntitySet="employee">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="telephone" ColumnName="telephone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="license_number" ColumnName="license_number" />
                 <ScalarProperty Name="employee_type_id" ColumnName="employee_type_id" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="license_number" ColumnName="license_number" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee_type">
+            <EntityTypeMapping TypeName="dbModel.employee_type">
+              <MappingFragment StoreEntitySet="employee_type">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="license_type" ColumnName="license_type" />
+                <ScalarProperty Name="salery" ColumnName="salery" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expense">
+            <EntityTypeMapping TypeName="dbModel.expense">
+              <MappingFragment StoreEntitySet="expense">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="passenger">
+            <EntityTypeMapping TypeName="dbModel.passenger">
+              <MappingFragment StoreEntitySet="passenger">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="pohne" ColumnName="pohne" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transportation">
+            <EntityTypeMapping TypeName="dbModel.transportation">
+              <MappingFragment StoreEntitySet="transportation">
+                <ScalarProperty Name="income" ColumnName="income" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transportation_passangers">
+            <EntityTypeMapping TypeName="dbModel.transportation_passangers">
+              <MappingFragment StoreEntitySet="transportation_passangers">
+                <ScalarProperty Name="passenger_id" ColumnName="passenger_id" />
+                <ScalarProperty Name="transportation_id" ColumnName="transportation_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicle">
+            <EntityTypeMapping TypeName="dbModel.vehicle">
+              <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="sits" ColumnName="sits" />
+                <ScalarProperty Name="car_model" ColumnName="car_model" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicle_assign">
+            <EntityTypeMapping TypeName="dbModel.vehicle_assign">
+              <MappingFragment StoreEntitySet="vehicle_assign">
+                <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="beginning_time" ColumnName="beginning_time" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -537,7 +595,7 @@ FROM [dbo].[employee] AS [employee]</DefiningQuery>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
