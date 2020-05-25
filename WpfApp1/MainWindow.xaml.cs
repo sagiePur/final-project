@@ -20,10 +20,24 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        dbEntities2 db = new dbEntities2();
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private void UpdateWorkerDataGrid()
+        {
+            WorkersDataGrid.ItemsSource = db.employee.ToList();
+        }
+
+        private void AddWorker_Click(object sender, RoutedEventArgs e)
+        {
+            AddWorker window = new AddWorker();
+            this.Hide();
+            window.ShowDialog();
+            this.Show();
+            UpdateWorkerDataGrid();
+        }
     }
 }
