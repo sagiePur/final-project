@@ -53,5 +53,10 @@ namespace WpfApp1
 
             this.Close();
         }
+
+        private void EmployeeTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
