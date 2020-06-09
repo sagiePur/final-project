@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         Title="EditWorker" Height="409.688" Width="297.5">
     <Grid>
-        <Label Content="Chosse employee" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <ComboBox x:Name="EditEmployeeComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="71,36,0,0"/>
         <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="22" Margin="71,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Text="&#xA;"/>
         <Label Content="Name" HorizontalAlignment="Left" Margin="71,63,0,0" VerticalAlignment="Top" FontSize="10"/>
         <TextBox x:Name="TelephoneTextBox" HorizontalAlignment="Left" Height="22" Margin="71,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Text="&#xA;"/>
@@ -19,7 +17,6 @@
         <Label Content="License Number" HorizontalAlignment="Left" Margin="71,213,0,0" VerticalAlignment="Top" FontSize="10"/>
         <Label Content="Type" HorizontalAlignment="Left" Margin="71,264,0,0" VerticalAlignment="Top" FontSize="10"/>
         <ComboBox x:Name="EmployeeTypeComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="71,287,0,0"/>
-        <Button x:Name="EditWorkerButton" Content="Edit" HorizontalAlignment="Left" Margin="108,340,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkerButton_Click"/>
-
+        <Button x:Name="EditWorkerButton" Content="Edit" HorizontalAlignment="Left" Margin="108,340,0,0" VerticalAlignment="Top" Width="75" Click="EditWorkerButton_Click"/>
     </Grid>
 </Window>

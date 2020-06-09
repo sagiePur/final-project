@@ -24,6 +24,10 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+
+            UpdateWorkerDataGrid();
+            UpdateWorkerTypesDataGrid();
+            UpdateCustomerDataGrid();
         }
 
         private void UpdateWorkerDataGrid()
@@ -31,13 +35,89 @@ namespace WpfApp1
             WorkersDataGrid.ItemsSource = db.employee.ToList();
         }
 
+        private void UpdateWorkerTypesDataGrid()
+        {
+            WorkerTypesDataGrid.ItemsSource = db.employee_type.ToList();
+        }
+
+        private void UpdateCustomerDataGrid()
+        {
+            CustomerDataGrid.ItemsSource = db.customer.ToList();
+        }
+
         private void AddWorker_Click(object sender, RoutedEventArgs e)
         {
             AddWorker window = new AddWorker();
-            this.Hide();
+            Hide();
             window.ShowDialog();
-            this.Show();
+            Show();
             UpdateWorkerDataGrid();
+        }
+
+        private void EditWorker_Click(object sender, RoutedEventArgs e)
+        {
+            EditWorker window = new EditWorker((employee)WorkersDataGrid.SelectedItem);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateWorkerDataGrid();
+        }
+
+        private void AddWorkerType_Click(object sender, RoutedEventArgs e)
+        {
+            AddWorkerType window = new AddWorkerType();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateWorkerTypesDataGrid();
+        }
+
+        private void EditWorkerType_Click(object sender, RoutedEventArgs e)
+        {
+            EditWorkerType window = new EditWorkerType((employee_type)WorkerTypesDataGrid.SelectedItem);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateWorkerTypesDataGrid();
+        }
+
+        private void DeleteWorkerType_Click(object sender, RoutedEventArgs e)
+        {
+            db.employee_type.Remove((employee_type)WorkerTypesDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateWorkerTypesDataGrid();
+        }
+
+        private void DeleteWorker_Click(object sender, RoutedEventArgs e)
+        {
+            db.employee.Remove((employee)WorkersDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateWorkerDataGrid();
+        }
+
+        private void AddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+          AddCustomer window = new AddCustomer();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateCustomerDataGrid();
+        }
+
+        private void EditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            EditCustomer window = new EditCustomer((customer)CustomerDataGrid.SelectedItem);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateCustomerDataGrid();
+        }
+
+        private void DeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            db.customer.Remove((customer)CustomerDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateCustomerDataGrid();
         }
     }
 }

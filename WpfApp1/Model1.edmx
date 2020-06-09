@@ -82,6 +82,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="car_model" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sits" Type="int" Nullable="false" />
+          <Property Name="car_number" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="vehicle_assign">
           <Key>
@@ -370,6 +371,7 @@
           <Property Name="sits" Type="Int32" Nullable="false" />
           <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_Tovehicle" FromRole="vehicle" ToRole="transportation" />
           <NavigationProperty Name="vehicle_assign" Relationship="dbModel.FK_vehicle_assign" FromRole="vehicle" ToRole="vehicle_assign" />
+          <Property Name="car_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="vehicle_assign">
           <Key>
@@ -563,6 +565,7 @@
           <EntitySetMapping Name="vehicle">
             <EntityTypeMapping TypeName="dbModel.vehicle">
               <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="car_number" ColumnName="car_number" />
                 <ScalarProperty Name="sits" ColumnName="sits" />
                 <ScalarProperty Name="car_model" ColumnName="car_model" />
                 <ScalarProperty Name="id" ColumnName="id" />

@@ -23,7 +23,7 @@ namespace WpfApp1
         public AddWorker()
         {
             InitializeComponent();
-            EmployeeTypeComboBox.ItemsSource = db.employee.ToList();
+            EmployeeTypeComboBox.ItemsSource = db.employee_type.ToList();
             EmployeeTypeComboBox.DisplayMemberPath = "title";
         }
 

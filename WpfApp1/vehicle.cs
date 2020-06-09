@@ -24,6 +24,7 @@ namespace WpfApp1
         public int id { get; set; }
         public string car_model { get; set; }
         public int sits { get; set; }
+        public string car_number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transportation> transportation { get; set; }
