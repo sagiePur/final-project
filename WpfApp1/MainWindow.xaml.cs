@@ -28,6 +28,7 @@ namespace WpfApp1
             UpdateWorkerDataGrid();
             UpdateWorkerTypesDataGrid();
             UpdateCustomerDataGrid();
+            UpdatePassengerDataGrid();
         }
 
         private void UpdateWorkerDataGrid()
@@ -44,6 +45,13 @@ namespace WpfApp1
         {
             CustomerDataGrid.ItemsSource = db.customer.ToList();
         }
+
+        private void UpdatePassengerDataGrid()
+        {
+            PassengerDataGrid.ItemsSource = db.passenger.ToList();
+        }
+
+
 
         private void AddWorker_Click(object sender, RoutedEventArgs e)
         {
@@ -118,6 +126,31 @@ namespace WpfApp1
             db.customer.Remove((customer)CustomerDataGrid.SelectedItem);
             db.SaveChanges();
             UpdateCustomerDataGrid();
+        }
+
+        private void AddPassenger_Click(object sender, RoutedEventArgs e)
+        {
+           AddPassenger window = new AddPassenger();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdatePassengerDataGrid();
+        }
+
+        private void EditPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            EditPassenger window = new EditPassenger((passenger)PassengerDataGrid.SelectedItem);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdatePassengerDataGrid();
+        }
+
+        private void DeletePassenger_Click(object sender, RoutedEventArgs e)
+        {
+            db.passenger.Remove((passenger)PassengerDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdatePassengerDataGrid();
         }
     }
 }
