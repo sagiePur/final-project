@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4acb004c6e874df6b7cc6b89b6c7397e" Name="Diagram1" ZoomLevel="112">
+      <Diagram DiagramId="4acb004c6e874df6b7cc6b89b6c7397e" Name="Diagram1" ZoomLevel="121">
         <EntityTypeShape EntityType="dbModel.customer" Width="1.5" PointX="13.5" PointY="4.875" />
         <EntityTypeShape EntityType="dbModel.employee" Width="1.5" PointX="8" PointY="7.875" />
         <EntityTypeShape EntityType="dbModel.employee_type" Width="1.5" PointX="7.875" PointY="12" />
         <EntityTypeShape EntityType="dbModel.expense" Width="1.5" PointX="2.25" PointY="8.625" />
         <EntityTypeShape EntityType="dbModel.passenger" Width="1.5" PointX="4.75" PointY="1.375" />
         <EntityTypeShape EntityType="dbModel.transportation" Width="1.5" PointX="8.25" PointY="4.375" />
-        <EntityTypeShape EntityType="dbModel.transportation_passangers" Width="1.5" PointX="8.375" PointY="1.25" />
-        <EntityTypeShape EntityType="dbModel.vehicle" Width="1.5" PointX="3.875" PointY="4.375" />
-        <EntityTypeShape EntityType="dbModel.vehicle_assign" Width="1.5" PointX="0.5" PointY="4.25" />
+        <EntityTypeShape EntityType="dbModel.transportation_passangers" Width="1.5" PointX="8.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.vehicle" Width="1.5" PointX="0.875" PointY="4.375" />
+        <EntityTypeShape EntityType="dbModel.vehicle_assign" Width="1.5" PointX="4.375" PointY="4.375" />
         <AssociationConnector Association="dbModel.FK_transportation_ToCustomer" />
         <AssociationConnector Association="dbModel.FK_employee_employee_type" />
         <AssociationConnector Association="dbModel.FK_expense_ToEmployee" />
         <AssociationConnector Association="dbModel.FK_transportation_Toemployee" />
         <AssociationConnector Association="dbModel.FK_transportation_passangers_Topassenger" />
         <AssociationConnector Association="dbModel.FK_transportation_passangers_Totransportation" />
-        <AssociationConnector Association="dbModel.FK_transportation_Tovehicle" />
         <AssociationConnector Association="dbModel.FK_vehicle_assign" />
+        <AssociationConnector Association="dbModel.FK_transportation_Tovehicle_assign" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

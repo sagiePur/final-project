@@ -22,14 +22,14 @@ namespace WpfApp1
     
         public int Id { get; set; }
         public int employee_id { get; set; }
-        public int vehicle_id { get; set; }
         public int customer_id { get; set; }
         public double income { get; set; }
+        public int vehicle_assign_id { get; set; }
     
         public virtual customer customer { get; set; }
         public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<transportation_passangers> transportation_passangers { get; set; }
-        public virtual vehicle vehicle { get; set; }
+        public virtual vehicle_assign vehicle_assign { get; set; }
     }
 }

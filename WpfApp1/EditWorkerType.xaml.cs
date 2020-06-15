@@ -22,18 +22,18 @@ namespace WpfApp1
     {
         dbEntities2 db = new dbEntities2();
 
-        employee_type o;
+        employee_type e;
 
-        public EditWorkerType(employee_type t)
+        public EditWorkerType(employee_type o)
         {
-            InitializeComponent();
+            InitializeComponent(); 
 
-            o = t;
+            e = o;
 
-            TitleTextBox.Text = t.title;
-            SalaryTextBox.Text = t.salery.ToString();
-            LicenseTypeComboBox.Text = t.license_type;
-            DescriptionTextBox.Text = t.description;
+            TitleTextBox.Text = e.title;
+            SalaryTextBox.Text = e.salery.ToString();
+            LicenseTypeComboBox.Text = e.license_type;
+            DescriptionTextBox.Text = e.description;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,12 +43,12 @@ namespace WpfApp1
             string type = LicenseTypeComboBox.Text;
             string description = DescriptionTextBox.Text;
 
-            o.title = title;
-            o.salery = salary;
-            o.license_type = type;
-            o.description = description;
+            this.e.title = title;
+            this.e.salery = salary;
+            this.e.license_type = type;
+            this.e.description = description;
 
-            db.employee_type.AddOrUpdate(o);
+            db.employee_type.AddOrUpdate(this.e);
             db.SaveChanges();
 
             Close();

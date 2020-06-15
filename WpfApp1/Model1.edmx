@@ -63,7 +63,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="employee_id" Type="int" Nullable="false" />
-          <Property Name="vehicle_id" Type="int" Nullable="false" />
+          <Property Name="vehicle_assign_id" Type="int" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
           <Property Name="income" Type="float" Nullable="false" />
         </EntityType>
@@ -165,15 +165,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_transportation_Tovehicle">
-          <End Role="vehicle" Type="Self.vehicle" Multiplicity="1" />
+        <Association Name="FK_transportation_Tovehicle_assign">
+          <End Role="vehicle_assign" Type="Self.vehicle_assign" Multiplicity="1" />
           <End Role="transportation" Type="Self.transportation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="vehicle">
-              <PropertyRef Name="id" />
+            <Principal Role="vehicle_assign">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="transportation">
-              <PropertyRef Name="vehicle_id" />
+              <PropertyRef Name="vehicle_assign_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -223,8 +223,8 @@
             <End Role="employee" EntitySet="employee" />
             <End Role="transportation" EntitySet="transportation" />
           </AssociationSet>
-          <AssociationSet Name="FK_transportation_Tovehicle" Association="Self.FK_transportation_Tovehicle">
-            <End Role="vehicle" EntitySet="vehicle" />
+          <AssociationSet Name="FK_transportation_Tovehicle_assign" Association="Self.FK_transportation_Tovehicle_assign">
+            <End Role="vehicle_assign" EntitySet="vehicle_assign" />
             <End Role="transportation" EntitySet="transportation" />
           </AssociationSet>
           <AssociationSet Name="FK_vehicle_assign" Association="Self.FK_vehicle_assign">
@@ -270,13 +270,13 @@
             <End Role="transportation" EntitySet="transportation" />
             <End Role="transportation_passangers" EntitySet="transportation_passangers" />
           </AssociationSet>
-          <AssociationSet Name="FK_transportation_Tovehicle" Association="dbModel.FK_transportation_Tovehicle">
-            <End Role="vehicle" EntitySet="vehicle" />
-            <End Role="transportation" EntitySet="transportation" />
-          </AssociationSet>
           <AssociationSet Name="FK_vehicle_assign" Association="dbModel.FK_vehicle_assign">
             <End Role="vehicle" EntitySet="vehicle" />
             <End Role="vehicle_assign" EntitySet="vehicle_assign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_transportation_Tovehicle_assign" Association="dbModel.FK_transportation_Tovehicle_assign">
+            <End Role="vehicle_assign" EntitySet="vehicle_assign" />
+            <End Role="transportation" EntitySet="transportation" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="customer">
@@ -344,13 +344,13 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="employee_id" Type="Int32" Nullable="false" />
-          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
           <Property Name="customer_id" Type="Int32" Nullable="false" />
           <Property Name="income" Type="Double" Nullable="false" />
           <NavigationProperty Name="customer" Relationship="dbModel.FK_transportation_ToCustomer" FromRole="transportation" ToRole="customer" />
           <NavigationProperty Name="employee" Relationship="dbModel.FK_transportation_Toemployee" FromRole="transportation" ToRole="employee" />
           <NavigationProperty Name="transportation_passangers" Relationship="dbModel.FK_transportation_passangers_Totransportation" FromRole="transportation" ToRole="transportation_passangers" />
-          <NavigationProperty Name="vehicle" Relationship="dbModel.FK_transportation_Tovehicle" FromRole="transportation" ToRole="vehicle" />
+          <Property Name="vehicle_assign_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="vehicle_assign" Relationship="dbModel.FK_transportation_Tovehicle_assign" FromRole="transportation" ToRole="vehicle_assign" />
         </EntityType>
         <EntityType Name="transportation_passangers">
           <Key>
@@ -369,7 +369,6 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="car_model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sits" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_Tovehicle" FromRole="vehicle" ToRole="transportation" />
           <NavigationProperty Name="vehicle_assign" Relationship="dbModel.FK_vehicle_assign" FromRole="vehicle" ToRole="vehicle_assign" />
           <Property Name="car_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -382,6 +381,7 @@
           <Property Name="beginning_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_time" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="vehicle" Relationship="dbModel.FK_vehicle_assign" FromRole="vehicle_assign" ToRole="vehicle" />
+          <NavigationProperty Name="transportation" Relationship="dbModel.FK_transportation_Tovehicle_assign" FromRole="vehicle_assign" ToRole="transportation" />
         </EntityType>
         <Association Name="FK_transportation_ToCustomer">
           <End Type="dbModel.customer" Role="customer" Multiplicity="1" />
@@ -455,18 +455,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_transportation_Tovehicle">
-          <End Type="dbModel.vehicle" Role="vehicle" Multiplicity="1" />
-          <End Type="dbModel.transportation" Role="transportation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="vehicle">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="transportation">
-              <PropertyRef Name="vehicle_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_vehicle_assign">
           <End Type="dbModel.vehicle" Role="vehicle" Multiplicity="1" />
           <End Type="dbModel.vehicle_assign" Role="vehicle_assign" Multiplicity="*" />
@@ -476,6 +464,18 @@
             </Principal>
             <Dependent Role="vehicle_assign">
               <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_transportation_Tovehicle_assign">
+          <End Type="dbModel.vehicle_assign" Role="vehicle_assign" Multiplicity="1" />
+          <End Type="dbModel.transportation" Role="transportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle_assign">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="transportation">
+              <PropertyRef Name="vehicle_assign_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -545,9 +545,9 @@
           <EntitySetMapping Name="transportation">
             <EntityTypeMapping TypeName="dbModel.transportation">
               <MappingFragment StoreEntitySet="transportation">
+                <ScalarProperty Name="vehicle_assign_id" ColumnName="vehicle_assign_id" />
                 <ScalarProperty Name="income" ColumnName="income" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

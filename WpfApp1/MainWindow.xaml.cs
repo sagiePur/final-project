@@ -29,6 +29,8 @@ namespace WpfApp1
             UpdateWorkerTypesDataGrid();
             UpdateCustomerDataGrid();
             UpdatePassengerDataGrid();
+            UpdateVehicleDataGrid();
+            UpdateExpenseDataGride();
         }
 
         private void UpdateWorkerDataGrid()
@@ -49,6 +51,16 @@ namespace WpfApp1
         private void UpdatePassengerDataGrid()
         {
             PassengerDataGrid.ItemsSource = db.passenger.ToList();
+        }
+
+        private void UpdateVehicleDataGrid()
+        {
+            VehicleDataGrid.ItemsSource = db.vehicle.ToList();
+        }
+
+        private void UpdateExpenseDataGride()
+        {
+            ExpenseDataGrid.ItemsSource = db.expense.ToList();
         }
 
 
@@ -151,6 +163,40 @@ namespace WpfApp1
             db.passenger.Remove((passenger)PassengerDataGrid.SelectedItem);
             db.SaveChanges();
             UpdatePassengerDataGrid();
+        }
+
+        private void AddVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            AddVehicle window = new AddVehicle();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateVehicleDataGrid();
+        }
+
+        private void EditVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            EditVehicle window = new EditVehicle((vehicle)VehicleDataGrid.SelectedItem);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateVehicleDataGrid();
+        }
+
+        private void DeleteVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            db.vehicle.Remove((vehicle)VehicleDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateVehicleDataGrid();
+        }
+
+        private void AddExpense_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpense window = new AddExpense();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateExpenseDataGride();
         }
     }
 }

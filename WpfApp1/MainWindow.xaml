@@ -24,7 +24,7 @@
                     <Button x:Name="DeleteWorkerType" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteWorkerType_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="לקוחות">
+            <TabItem Header="לקוחות" Margin="54,-2,-58,0">
                 <Grid Background="White">
                     <DataGrid x:Name="CustomerDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
                     <Button x:Name="AddCustomer" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddCustomer_Click"/>
@@ -32,12 +32,28 @@
                     <Button x:Name="DeleteCustomer" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteCustomer_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="נוסעים" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+            <TabItem Header="נוסעים" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54" Margin="59,-2,-59,0">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="PassengerDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
                     <Button x:Name="AddPassenger" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddPassenger_Click"/>
                     <Button x:Name="EditPassenger" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditPassenger_Click"/>
                     <Button x:Name="DeletePassenger" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeletePassenger_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="רכבים" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top" Width="54" Margin="-104,0,104,0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="VehicleDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
+                    <Button x:Name="AddVehicle" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddVehicle_Click"/>
+                    <Button x:Name="EditVehicle" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditVehicle_Click"/>
+                    <Button x:Name="DeleteVehicle" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteVehicle_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="הוצאות" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54" Margin="6,-2,-6,0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="ExpenseDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
+                    <Button x:Name="AddExpense" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddExpense_Click"/>
+                    <Button x:Name="EditExpense" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="DeleteExpense" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
         </TabControl>

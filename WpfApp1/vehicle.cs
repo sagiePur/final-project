@@ -17,7 +17,6 @@ namespace WpfApp1
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public vehicle()
         {
-            this.transportation = new HashSet<transportation>();
             this.vehicle_assign = new HashSet<vehicle_assign>();
         }
     
@@ -26,8 +25,6 @@ namespace WpfApp1
         public int sits { get; set; }
         public string car_number { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<transportation> transportation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<vehicle_assign> vehicle_assign { get; set; }
     }

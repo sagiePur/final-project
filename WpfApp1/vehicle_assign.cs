@@ -14,11 +14,19 @@ namespace WpfApp1
     
     public partial class vehicle_assign
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public vehicle_assign()
+        {
+            this.transportation = new HashSet<transportation>();
+        }
+    
         public int Id { get; set; }
         public int vehicle_id { get; set; }
         public System.DateTime beginning_time { get; set; }
         public System.DateTime end_time { get; set; }
     
         public virtual vehicle vehicle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transportation> transportation { get; set; }
     }
 }
