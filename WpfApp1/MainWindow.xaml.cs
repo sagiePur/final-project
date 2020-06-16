@@ -30,7 +30,10 @@ namespace WpfApp1
             UpdateCustomerDataGrid();
             UpdatePassengerDataGrid();
             UpdateVehicleDataGrid();
-            UpdateExpenseDataGride();
+            UpdateExpenseDataGrid();
+            UpdateVehicleAssignDataGrid();
+            UpdateTransportationDataGrid();
+            UpdateTransportationPassengersDataGrid();
         }
 
         private void UpdateWorkerDataGrid()
@@ -58,12 +61,25 @@ namespace WpfApp1
             VehicleDataGrid.ItemsSource = db.vehicle.ToList();
         }
 
-        private void UpdateExpenseDataGride()
+        private void UpdateExpenseDataGrid()
         {
             ExpenseDataGrid.ItemsSource = db.expense.ToList();
         }
 
+        private void UpdateVehicleAssignDataGrid()
+        {
+            VehicleAssignDataGrid.ItemsSource = db.vehicle_assign.ToList();
+        }
 
+        private void UpdateTransportationDataGrid()
+        {
+            TransportationDataGrid.ItemsSource = db.transportation.ToList();
+        }
+
+        private void UpdateTransportationPassengersDataGrid()
+        {
+            TransportationPassengerDataGrid.ItemsSource = db.transportation_passangers.ToList();
+        }
 
         private void AddWorker_Click(object sender, RoutedEventArgs e)
         {
@@ -196,7 +212,110 @@ namespace WpfApp1
             Hide();
             window.ShowDialog();
             Show();
-            UpdateExpenseDataGride();
+            UpdateExpenseDataGrid();
+        }
+
+        private void EditExpense_Click(object sender, RoutedEventArgs e)
+        {
+            expense s = (expense)ExpenseDataGrid.SelectedItem;
+            if (s == null)
+                return;
+            EditExpense window = new EditExpense(s);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateExpenseDataGrid();
+        }
+
+        private void DeleteExpense_Click(object sender, RoutedEventArgs e)
+        {
+            db.expense.Remove((expense)ExpenseDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateExpenseDataGrid();
+        }
+
+        private void AddVehicleAssign_Click(object sender, RoutedEventArgs e)
+        {
+            AddVehicleAssign window = new AddVehicleAssign();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateVehicleAssignDataGrid();
+        }
+
+        private void EditVehicleAssign_Click(object sender, RoutedEventArgs e)
+        {
+            vehicle_assign s = (vehicle_assign)VehicleAssignDataGrid.SelectedItem;
+            if (s == null)
+                return;
+            EditVehicleAssign window = new EditVehicleAssign(s);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateVehicleAssignDataGrid();
+        }
+
+        private void DeleteVehicleAssign_Click(object sender, RoutedEventArgs e)
+        {
+            db.vehicle_assign.Remove((vehicle_assign)VehicleAssignDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateVehicleAssignDataGrid();
+        }
+
+        private void AddTransportation_Click(object sender, RoutedEventArgs e)
+        {
+            AddTransportation window = new AddTransportation();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateTransportationDataGrid();
+        }
+
+        private void EditTransportation_Click(object sender, RoutedEventArgs e)
+        {
+            transportation s = (transportation)TransportationDataGrid.SelectedItem;
+            if (s == null)
+                return;
+            EditTransportation window = new EditTransportation(s);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateTransportationDataGrid();
+        }
+
+        private void DeleteTransportation_Click(object sender, RoutedEventArgs e)
+        {
+            db.transportation.Remove((transportation)TransportationDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateTransportationDataGrid();
+        }
+
+        private void AddTransportationPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            AddTransportationPassenger window = new AddTransportationPassenger();
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateTransportationPassengersDataGrid();
+        }
+
+        private void EditTransportatioPassengern_Click(object sender, RoutedEventArgs e)
+        {
+            transportation_passangers s = (transportation_passangers)TransportationPassengerDataGrid.SelectedItem;
+            if (s == null)
+                return;
+            EditTransportationPassenger window = new EditTransportationPassenger(s);
+            Hide();
+            window.ShowDialog();
+            Show();
+            UpdateTransportationPassengersDataGrid();
+        }
+
+        private void DeleteTransportationPassenger_Click(object sender, RoutedEventArgs e)
+        {
+            db.transportation_passangers.Remove((transportation_passangers)TransportationPassengerDataGrid.SelectedItem);
+            db.SaveChanges();
+            UpdateTransportationPassengersDataGrid();
         }
     }
 }

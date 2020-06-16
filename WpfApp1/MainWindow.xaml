@@ -10,7 +10,15 @@
         <TabControl HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
             <TabItem Header="עובדים" HorizontalAlignment="Right" Width="51">
                 <Grid Background="White">
-                    <DataGrid x:Name="WorkersDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
+                    <DataGrid x:Name="WorkersDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding name}" Header="Name"/>
+                            <DataGridTextColumn Binding="{Binding telephone}" Header="Phone"/>
+                            <DataGridTextColumn Binding="{Binding address}" Header="Address"/>
+                            <DataGridTextColumn Binding="{Binding license_number}" Header="License Number"/>
+                            <DataGridTextColumn Binding="{Binding employee_type.title}" Header="Type"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button x:Name="AddWorker" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddWorker_Click"/>
                     <Button x:Name="EditWorker" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditWorker_Click"/>
                     <Button x:Name="DeleteWorker" Content="delete" HorizontalAlignment="Left" Margin="244,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteWorker_Click"/>
@@ -50,10 +58,59 @@
             </TabItem>
             <TabItem Header="הוצאות" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54" Margin="6,-2,-6,0">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="ExpenseDataGrid" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766"/>
+                    <DataGrid x:Name="ExpenseDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding date, StringFormat=d}" Header="Date"/>
+                            <DataGridTextColumn Binding="{Binding cost}" Header="Cost"/>
+                            <DataGridTextColumn Binding="{Binding description}" Header="Description"/>
+                            <DataGridTextColumn Binding="{Binding employee.name}" Header="Employee"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button x:Name="AddExpense" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddExpense_Click"/>
-                    <Button x:Name="EditExpense" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="DeleteExpense" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="EditExpense" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditExpense_Click"/>
+                    <Button x:Name="DeleteExpense" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteExpense_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="שיבוצי רכבים" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="80" Margin="6,-2,-32,0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="VehicleAssignDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding vehicle.car_number}" Header="Car Number"/>
+                            <DataGridTextColumn Binding="{Binding beginning_time}" Header="Start Date"/>
+                            <DataGridTextColumn Binding="{Binding end_time}" Header="End Date"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="AddVehicleAssign" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddVehicleAssign_Click"/>
+                    <Button x:Name="EditVehicleAssign" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditVehicleAssign_Click"/>
+                    <Button x:Name="DeleteVehicleAssign" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteVehicleAssign_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="הסעות" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="61" Margin="6,-2,-13,0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="TransportationDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding vehicle_assign.vehicle.car_number}" Header="Car Number"/>
+                            <DataGridTextColumn Binding="{Binding employee.name}" Header="Employee"/>
+                            <DataGridTextColumn Binding="{Binding customer.last_name}" Header="Customer"/>
+                            <DataGridTextColumn Binding="{Binding income}" Header="Income"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="AddTransportation" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddTransportation_Click"/>
+                    <Button x:Name="EditTransportation" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditTransportation_Click"/>
+                    <Button x:Name="DeleteTransportation" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteTransportation_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="נוסעי הסעות" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="81" Margin="6,-2,-26,0">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="TransportationPassengerDataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="322" Margin="10,59,0,0" VerticalAlignment="Top" Width="766">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding transportation.Id}" Header="Transportation Id"/>
+                            <DataGridTextColumn Binding="{Binding passenger.last_name}" Header="Passenger"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="AddTransportationPassenger" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="AddTransportationPassenger_Click"/>
+                    <Button x:Name="EditTransportationPassenger" Content="Edit" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="75" Click="EditTransportatioPassengern_Click"/>
+                    <Button x:Name="DeleteTransportationPassenger" Content="Delete" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteTransportationPassenger_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -31,7 +31,8 @@ namespace WpfApp1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int employeeId = ((employee)EmployeeIdComboBox.SelectedItem).Id;
-            DateTime date = dateP.DisplayDate;
+            DateTime date = (DateTime)dateP.SelectedDate;
+            //DateTime date = dateP.DisplayDate;
             float cost = (float.Parse(CostTextBox.Text));
             string description = DescriptionTextBox.Text;
 

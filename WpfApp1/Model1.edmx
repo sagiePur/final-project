@@ -20,7 +20,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -31,7 +31,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="salery" Type="float" Nullable="false" />
           <Property Name="license_type" Type="nvarchar" MaxLength="10" />
@@ -41,7 +41,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="employee_id" Type="int" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="cost" Type="float" Nullable="false" />
@@ -61,7 +61,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="employee_id" Type="int" Nullable="false" />
           <Property Name="vehicle_assign_id" Type="int" Nullable="false" />
           <Property Name="customer_id" Type="int" Nullable="false" />
@@ -71,7 +71,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="transportation_id" Type="int" Nullable="false" />
           <Property Name="passenger_id" Type="int" Nullable="false" />
         </EntityType>
@@ -79,7 +79,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="car_model" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sits" Type="int" Nullable="false" />
           <Property Name="car_number" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -88,7 +88,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vehicle_id" Type="int" Nullable="false" />
           <Property Name="beginning_time" Type="datetime" Nullable="false" />
           <Property Name="end_time" Type="datetime" Nullable="false" />
